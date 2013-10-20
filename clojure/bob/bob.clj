@@ -1,16 +1,16 @@
 (ns bob)
 
 (defn question? [s]
-  (= \? (.charAt s (- (.length s) 1))))
+  (= \? (last s)))
 
 (defn said-words? [s]
-  (not (nil? (re-find #"[a-zA-Z]" s))))
+  (re-find #"[a-zA-Z]" s))
 
 (defn shouting? [s]
-  (and (said-words? s) (nil? (re-find #"[a-z]" s))))
+  (and (said-words? s) (not (re-find #"[a-z]" s))))
 
 (defn silence? [s]
-  (not (nil? (re-matches #"\s*" s))))
+  (re-matches #"\s*" s))
 
 (defn response-for [statement]
   (cond
