@@ -1,14 +1,14 @@
 (ns bob)
 
-(defn question? [s]
+(defn- question? [s]
   (= \? (last s)))
 
-(defn shouting? [s]
+(defn- shouting? [s]
   (and
-    (= (clojure.string/upper-case s) s)
-    (not (= (clojure.string/lower-case s) s))))
+    (=    (clojure.string/upper-case s) s)
+    (not= (clojure.string/lower-case s) s)))
 
-(defn silence? [s]
+(defn- silence? [s]
   (clojure.string/blank? s))
 
 (defn response-for [statement]
