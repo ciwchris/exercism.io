@@ -1,13 +1,14 @@
-(ns anagram)
+(ns anagram
+  (require [clojure.string :refer [lower-case]]))
 
-(defn- anagram? [s item]
-  (and
-    (not= s item)
-    (= (frequencies s) (frequencies item))))
+(defn- anagram? [word letter-counts potential-anagram]
+  (let [potential-anagram (lower-case potential-anagram)]
+    (and
+      (not= word potential-anagram)
+      (= letter-counts (frequencies potential-anagram)))))
 
-(defn anagrams-for [s c]
-  (let [text (clojure.string/lower-case s)]
-    (filter #(anagram?
-               text
-               (clojure.string/lower-case %)) c)))
+(defn anagrams-for [word word-list]
+  (let [word (lower-case word)
+        letter-counts (frequencies word)]
+    (filter #(anagram? word letter-counts %) word-list)))
 
